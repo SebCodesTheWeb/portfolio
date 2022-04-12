@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    background-color: #0A8DF5;
+}
+
+#canvas1 {
+    /* border: 2px solid white; */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: url("rain.gif");
+    padding: 15px;
+    transition:cubic-bezier(0.47, 0, 0.745, 0.715) 150ms all;
+}
+
+#canvas1:hover {
+    border-radius: 25%;
+    padding: 20px;
+}
+
+/* Color Palette
+#F5F333 - yellow
+#79FC3A - lightgreen
+#41E675 - darkgreen
+#3AFCE8 - lightblue
+#0A8DF5 - darkblue
+*/
