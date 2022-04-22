@@ -1,32 +1,365 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: 0;
-    background-color: #0A8DF5;
-}
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap');
 
-#canvas1 {
-    /* border: 2px solid white; */
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background: url("rain.gif");
-    padding: 15px;
-    transition:cubic-bezier(0.47, 0, 0.745, 0.715) 150ms all;
-}
-
-#canvas1:hover {
-    border-radius: 25%;
-    padding: 20px;
+:root {
+    --main-font: "Ubuntu Mono", monospace;
+    --second-font: "VT323", monospace;
+    --third-font: "Major Mono Display", monospace;
+    --color-one: #038C3E;
+    --color-two: #025951;
+    --color-three: #034159;
+    --color-four: #0cf25d;
+    --color-five: #02735E;
 }
 
 /* Color Palette
-#F5F333 - yellow
-#79FC3A - lightgreen
+79FC3A - lightgreen
 #41E675 - darkgreen
 #3AFCE8 - lightblue
-#0A8DF5 - darkblue
+#0A8DF5 - darkblue#F5F333 - yellow
+#
 */
+
+
+/* Default Styling  =================================================================*/
+
+* {
+    vertical-align: baseline;
+	font-weight: inherit;
+	font-family: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	border: 0 none;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+    box-sizing: border-box;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-size: 1rem;
+}
+
+img { 
+    width: 100%;
+    display: block;
+}
+
+body {
+    line-height: 1.6em;
+    color: #EEE;
+    /* background-color: #070D08; */
+    /* background-color: #FFF; */
+    background-color: var(--color-four);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--main-font);
+}   
+
+/* Header ================================================================= */
+
+header {
+    background-color: #000;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 3rem;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+    animation: border-radius-header 2000ms 3500ms forwards;
+}
+
+#canvas1 {
+    border-radius: 50%;
+    width: 0px;
+    max-height: 400px;
+    background: url("rain.gif");
+    padding: 15px;
+    transition:cubic-bezier(0.47, 0, 0.745, 0.715) 150ms all;
+    animation: moveCanvas 2000ms 1000ms forwards;
+    transform: translate(40px);
+    visibility: hidden;
+    opacity: 0;
+}
+
+#canvas1:hover {
+    border-radius: 0;
+    padding: 30px;
+}
+
+#title-bar {
+    /* border-left: 5px solid #91D9A3; */
+    border-left: 5px solid var(--color-four);
+    padding-left: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    clip-path: inset( -100vw -100vw -100vw 0 ); 
+    animation: line 750ms 1000ms forwards;
+    height: 0;
+
+}
+
+#header-name, #developer-label {
+    font-size: 6rem;
+    line-height: 6rem;
+    /* color: #91D9A3; */
+    color: var(--color-four);
+    text-align: left;
+    font-family: var(--third-font);
+    animation: slideIn 2000ms 300ms forwards;
+    transform: translate(-110%);
+}
+
+#developer-label {
+    font-size: 4rem;
+    margin-top: 2rem;
+    opacity: 0;
+    box-sizing: content-box;
+    transition: linear 200ms all;
+}
+
+#developer-label:hover, #developer-label:focus {
+    opacity: 1;
+}
+
+/* Tech Quote  =================================================================*/
+#quote-section {
+    display:flex;
+    margin-top: 10rem;
+    min-height: 1000px;
+}
+
+#tech-quote {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    padding: 10em;
+}
+
+#barack-obama-text, #barack-obama-quote {
+    font-size: 2rem;
+    line-height: 4rem;
+    letter-spacing: .3em;
+    color: var(--color-three);
+    text-align: justify;
+    font-family: var(--main-font);
+    width: 75%;
+    transition: linear 250ms all;
+}
+
+#barack-obama-text:hover, #barack-obama-text:focus {
+    width: 77%;
+}
+
+#barack-obama-quote {
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid var(--color-); /* The typwriter cursor */
+    white-space: nowrap; 
+    animation: typing 3.5s steps(40, end)
+}
+
+#barack-obama-quote {
+    margin-top: 2rem;
+    border-bottom: 2px dashed var(--color-one);
+}
+
+#intro-about-me {
+    padding: 10em 10em 0 0;
+}
+
+#intro-about-me > h2 {
+    font-size: 1rem;
+    line-height: 1.6rem;
+    text-align: justify;
+    padding-right: 1em;
+    color: var(--color-three);
+    border-right: 2px dashed var(--color-one);
+}
+
+/* Projects ================================================================= */
+#projects {
+    margin-top: 10rem;
+}
+
+#project-title {
+    font-size: 5rem;
+    line-height: 6rem;
+    color: #000;
+    text-align: center;
+    font-family: var(--third-font);
+}
+
+#linnegebra-project {
+    border: 3px dashed #000;
+    margin-top: 10rem;
+}
+
+#linnegebra {
+    width: 800px;
+    margin: 0rem auto;
+    height: 450px;
+    background-image: url("img/equations.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: rotateX(0deg) rotateY(5deg) scaleX(1) ;
+    transform-origin: bottom center;
+    box-shadow: 20px 50px #000;
+}
+
+.lingebra-animation {
+    animation: trapdoor 1000ms 0ms forwards;
+}
+
+#linegebra-title {
+    font-size: 5rem;
+    margin-bottom: 3rem;
+    color: #000;
+    text-align: center;
+    font-family: var(--third-font);
+    visibility: hidden;
+}
+
+#you-like {
+    font-size: 2rem;
+    color: #000;
+    visibility: hidden;
+    margin-bottom: 2rem;
+}
+
+#black-foreground {
+    /* background-image: url("img/matrixprofile.png"); */
+    background-color: #000;
+    /* background-size: cover; */
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 800px;
+    height: 450px;
+    margin: 5rem auto;
+}
+
+#wish {
+    font-size: 2rem;
+    color: #000;
+}
+
+button { 
+    padding: 1em;
+    font-family: var(--third-font);
+    font-size: 1.5rem;
+    background: #000;
+    border-radius: 25%;
+    margin-top: 2rem; 
+    color: #fff;
+    transition: linear 150ms all;
+    width: 100px;
+}
+
+button:hover {
+    color: #333;
+    background: #fff;
+    cursor: pointer;
+}
+
+@keyframes trapdoor {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg) ;
+        box-shadow: 20px 50px #000;
+    }
+    
+    49% {
+        background-image: url("img/equations.jpg");
+    }
+    
+    50% {
+        background-image: url("img/lingebra.png");
+        transform: rotateX(90deg)  rotateY(0deg) scaleX(1.0);
+        box-shadow: 5px 10px #000;
+    }
+    70% {
+        transform: rotateX(90deg)  rotateY(0deg) scaleX(1.0);
+        background-image: url("img/lingebra.png");
+    }
+    
+    100% {
+        background-image: url("img/lingebra.png");
+        transform: rotateX(0deg) rotateY(0deg) ;
+        box-shadow: 20px 50px #000;
+    }
+}
+
+/* Animations ================================================================= */
+
+@keyframes slideIn {
+    0% {
+        transform: translate(-110%)
+    }
+
+    80% {
+        transform: translate(0%);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes line {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 400px;
+    }
+}
+
+@keyframes moveCanvas {
+    0% {
+        transform: translate(40px);
+        width: 0;
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(0);
+        width: 400px;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes border-radius-header {
+    0% {
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+    }
+
+    100% {
+        border-bottom-left-radius: 20%;
+        border-bottom-right-radius: 20%;
+    }
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }

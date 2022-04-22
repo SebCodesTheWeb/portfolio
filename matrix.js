@@ -13,7 +13,7 @@ myImage.addEventListener("load", function() { //Using base 64 prevents issues du
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     let particlesArray = [];
-    const numberOfParticles = 500;
+    const numberOfParticles = 1000;
 
     let mappedImage = []; // Containing Brightness of every pixel
     for(let y = 0; y < canvas.height; y++) {
@@ -64,7 +64,7 @@ myImage.addEventListener("load", function() { //Using base 64 prevents issues du
 
         draw() {
             ctx.beginPath();
-            ctx.fillStyle = "#41E675";
+            ctx.fillStyle = "#0cf25d";
             ctx.font = `${this.fontSize}px Ubuntu Mono`
             ctx.fillText(`${Math.round(Math.random())}`, this.x, this.y);
             ctx.fill();
@@ -74,6 +74,7 @@ myImage.addEventListener("load", function() { //Using base 64 prevents issues du
         for(let i = 0; i < numberOfParticles; i++) { //Generate tons of random particles
             particlesArray.push(new Particle);
         }
+
     }
 
     function animate() {
@@ -87,12 +88,37 @@ myImage.addEventListener("load", function() { //Using base 64 prevents issues du
             ctx.globalAlpha = particlesArray[i].speed / 2;
             particlesArray[i].draw();
         }
+        if(isMouseHovering && Math.abs(totalOffsetX-cursorXPos) > 1) { //If the rain is not at same point as curosr
+            totalOffsetX += rainSpeed;
+            console.log(totalOffsetX, cursorXPos);
+            if(totalOffsetX > -100) { 
+                ctx.translate(rainSpeed, 0);  //move rain by speed
+            } else {
+                totalOffsetX -= rainSpeed;
+            }
+        }
+
         requestAnimationFrame(animate);
+
     }
-    init();
+    init();    
     animate();
 })
 
+let isMouseHovering = false;
+let rainSpeed = 0;
+let totalOffsetX = 0;
+let cursorXPos = 0;
+
 canvas.addEventListener("mousemove", function(e) {
-    ctx.translate((e.clientX-innerWidth/2)/100, 0);
+    cursorXPos = e.offsetX-200; //Cursor position
+    rainSpeed = (e.offsetX-200)/(Math.random()*25 +25); //How fast to move rain
+})
+
+canvas.addEventListener("mouseover", function(e) {
+    isMouseHovering = true;
+})
+
+canvas.addEventListener("mouseout", function(e) {
+    isMouseHovering = false;
 })
