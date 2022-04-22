@@ -66,6 +66,24 @@ body {
     font-family: var(--main-font);
 }   
 
+button { 
+    padding: 1em;
+    font-family: var(--third-font);
+    font-size: 1.5rem;
+    background: #000;
+    border-radius: 25%;
+    margin-top: 2rem; 
+    color: #fff;
+    transition: linear 150ms all;
+    width: 100px;
+}
+
+button:hover {
+    color: #333;
+    background: #fff;
+    cursor: pointer;
+}
+
 /* Header ================================================================= */
 
 header {
@@ -190,6 +208,8 @@ header {
     border-right: 2px dashed var(--color-one);
 }
 
+
+
 /* Projects ================================================================= */
 #projects {
     margin-top: 10rem;
@@ -203,102 +223,62 @@ header {
     font-family: var(--third-font);
 }
 
-#linnegebra-project {
-    border: 3px dashed #000;
+#neline-project {
     margin-top: 10rem;
+    width: 90vw;
+    display: flex;
+    margin: 0 auto;
 }
 
-#linnegebra {
-    width: 800px;
+#neline-project > div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    border-right: 2px dashed var(--color-one);
+}
+
+#neline-video {
+    width: 560px;
     margin: 0rem auto;
-    height: 450px;
-    background-image: url("img/equations.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transform: rotateX(0deg) rotateY(5deg) scaleX(1) ;
-    transform-origin: bottom center;
+    height: 315px;
+    transform: rotateX(90deg)  rotateY(0deg) scaleX(1.0);
+    transform-origin: bottom left;
     box-shadow: 20px 50px #000;
+    animation: trapdoor 1000ms forwards;
 }
 
-.lingebra-animation {
-    animation: trapdoor 1000ms 0ms forwards;
-}
-
-#linegebra-title {
+#neline-title {
     font-size: 5rem;
     margin-bottom: 3rem;
     color: #000;
     text-align: center;
     font-family: var(--third-font);
-    visibility: hidden;
-}
-
-#you-like {
-    font-size: 2rem;
-    color: #000;
-    visibility: hidden;
-    margin-bottom: 2rem;
 }
 
 #black-foreground {
-    /* background-image: url("img/matrixprofile.png"); */
-    background-color: #000;
-    /* background-size: cover; */
     background-position: center;
     background-repeat: no-repeat;
-    width: 800px;
-    height: 450px;
+    width: 560px;
+    height: 315px;
     margin: 5rem auto;
 }
 
-#wish {
-    font-size: 2rem;
-    color: #000;
-}
-
-button { 
-    padding: 1em;
-    font-family: var(--third-font);
-    font-size: 1.5rem;
-    background: #000;
-    border-radius: 25%;
-    margin-top: 2rem; 
-    color: #fff;
-    transition: linear 150ms all;
-    width: 100px;
-}
-
-button:hover {
-    color: #333;
-    background: #fff;
-    cursor: pointer;
-}
 
 @keyframes trapdoor {
     0% {
-        transform: rotateX(0deg) rotateY(0deg) ;
-        box-shadow: 20px 50px #000;
-    }
-    
-    49% {
-        background-image: url("img/equations.jpg");
-    }
-    
-    50% {
-        background-image: url("img/lingebra.png");
         transform: rotateX(90deg)  rotateY(0deg) scaleX(1.0);
         box-shadow: 5px 10px #000;
     }
     70% {
         transform: rotateX(90deg)  rotateY(0deg) scaleX(1.0);
-        background-image: url("img/lingebra.png");
     }
     
     100% {
-        background-image: url("img/lingebra.png");
         transform: rotateX(0deg) rotateY(0deg) ;
-        box-shadow: 20px 50px #000;
+        box-shadow: 10px 20px #000;
     }
 }
 
