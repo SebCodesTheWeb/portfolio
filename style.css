@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap');
 
+html {
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: center;
+}
+
 :root {
     --main-font: "Ubuntu Mono", monospace;
     --second-font: "VT323", monospace;
@@ -10,15 +16,6 @@
     --color-four: #0cf25d;
     --color-five: #02735E;
 }
-
-/* Color Palette
-79FC3A - lightgreen
-#41E675 - darkgreen
-#3AFCE8 - lightblue
-#0A8DF5 - darkblue#F5F333 - yellow
-#
-*/
-
 
 /* Default Styling  =================================================================*/
 
@@ -36,26 +33,40 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    font-family: var(--main-font);
+    max-width: 2560px;
+    /* outline: 5px solid cyan */
 }
 
 ol, ul {
 	list-style: none;
 }
 
-h1, h2, h3, h4, h5, h6, p {
-    font-size: 1rem;
+a {
+    font-size: inherit;
+    font-family: var(--main-font);
+    color: inherit;
 }
 
+h1 {font-size: 4.0rem; font-family: var(--third-font)}
+h2 {font-size: 3.0rem; font-family: var(--main-font);}
+h3 {font-size: 2.0rem;}
+h4 {font-size: 1.5rem;}
+h5 {font-size: 1.25rem;}
+h6 {font-size: 0.75rem;}
+p {font-size: 1.0rem;}
+
 img { 
-    width: 100%;
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
     display: block;
+    object-fit: contain;
 }
 
 body {
     line-height: 1.6em;
     color: #EEE;
-    /* background-color: #070D08; */
-    /* background-color: #FFF; */
     background-color: var(--color-four);
     display: flex;
     flex-direction: column;
@@ -64,14 +75,16 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: var(--main-font);
+    overflow-x: hidden;
 }   
 
 button { 
-    padding: 1em;
+    padding: .5em;
     font-family: var(--third-font);
     font-size: 1.5rem;
     background: #000;
-    border-radius: 25%;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
     margin-top: 2rem; 
     color: #fff;
     transition: linear 150ms all;
@@ -79,7 +92,7 @@ button {
 }
 
 button:hover {
-    color: #333;
+    color: #000;
     background: #fff;
     cursor: pointer;
 }
@@ -91,18 +104,30 @@ header {
     border-bottom-left-radius: 0%;
     border-bottom-right-radius: 0%;
     display: flex;
+    flex-direction: column;
     align-content: center;
     align-items: center;
     gap: 3rem;
     justify-content: center;
     width: 100vw;
-    min-height: 100vh;
-    animation: border-radius-header 2000ms 3500ms forwards;
+    height: 100vh;
+    max-height: 1440px;
+    animation: border-radius-header 2000ms 3000ms forwards;
+}
+
+
+#intro-animation {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 3rem;
+    justify-content: center;
 }
 
 #canvas1 {
     border-radius: 50%;
     width: 0px;
+    max-width: 350px;
     max-height: 400px;
     background: url("rain.gif");
     padding: 15px;
@@ -119,7 +144,6 @@ header {
 }
 
 #title-bar {
-    /* border-left: 5px solid #91D9A3; */
     border-left: 5px solid var(--color-four);
     padding-left: 1.5em;
     display: flex;
@@ -132,9 +156,8 @@ header {
 }
 
 #header-name, #developer-label {
-    font-size: 6rem;
-    line-height: 6rem;
-    /* color: #91D9A3; */
+    font-size: 4rem;
+    line-height: 4rem;
     color: var(--color-four);
     text-align: left;
     font-family: var(--third-font);
@@ -153,6 +176,60 @@ header {
 #developer-label:hover, #developer-label:focus {
     opacity: 1;
 }
+
+#scroll-down {
+    display: flex;
+    gap: 1em;
+    opacity: 0;
+    animation: reveal 2000ms 3000ms forwards;
+    flex-direction: column;
+}
+
+#scroll-to-project-button {
+    width: auto;
+}
+
+#down-arrow-header {
+    transition:cubic-bezier(0.25, 0.46, 0.45, 0.94) 200ms transform;
+}
+
+/* Navigation ================================================================= */
+#main-nav {
+    position: fixed;
+    top: 0em;
+    right: 0em;
+    padding: 1.5em 8em;
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #000;
+    z-index: 1;
+}
+
+#nav-profile-img {
+    position: absolute;
+    top: 1em;
+    right: 2em;
+}
+
+#main-nav > ul {
+    display: flex;
+    gap: 2em;
+}
+
+#main-nav > ul > li > a {
+    font-size: 1.25rem;
+    color: var(--color-four);
+    font-family: var(--third-font);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#main-nav > ul > li > a:hover {
+    color: #fff;
+}
+
 
 /* Tech Quote  =================================================================*/
 #quote-section {
@@ -195,19 +272,158 @@ header {
     border-bottom: 2px dashed var(--color-one);
 }
 
-#intro-about-me {
-    padding: 10em 10em 0 0;
+/* About me ====================================== */
+#about-me {
+    margin-top: 10rem;
+    background-color: #000;
+    width: 100vw;
+    padding: 10rem;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
 }
 
-#intro-about-me > h2 {
+#intro-about-me > p {
     font-size: 1rem;
     line-height: 1.6rem;
     text-align: justify;
-    padding-right: 1em;
-    color: var(--color-three);
-    border-right: 2px dashed var(--color-one);
+    margin-top: 2rem;
 }
 
+/* Disabling margin for first element so things line up nicely */
+#intro-about-me > p:first-child{ 
+    margin-top: 0 !important;
+}
+
+#intro-about-me {
+    max-width: 80ch;
+}
+
+#images-about-me {
+    display: flex;
+    align-items: flex-start;
+    gap: 2em;
+}
+
+.img-about-me {
+    height: 400px;
+    width: auto !important;
+    border: 2px dashed var(--color-one);
+}
+
+#info-me {
+    display: flex;
+    justify-content: space-around;
+    align-items:flex-start;
+}
+
+#setup-img {
+    border-bottom-left-radius: 10%;
+    border-top-left-radius: 10%;
+    border-bottom-right-radius: 0%;
+    border-top-right-radius: 0%;
+}
+
+/* Contact ================================================================= */
+#contact {
+    color: #000;
+    margin-top: 5rem;
+    line-height: 3em;
+}
+
+#contact-info {
+    text-align: left;
+}
+
+#splitter {
+    display: flex;
+    gap: 5em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+
+#form-mail {
+    padding: 3em;
+    background-color: var(--color-one);
+    border-bottom-left-radius: 10%;
+    border-top-left-radius: 10%;
+    border: 2px dashed var(--color-one);
+    width: 50vw;
+    color: #fff;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: flex-end;
+    text-align: left;
+}
+
+input, textarea {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    width: 100%;
+    min-height: 2rem;
+    padding: .5em;
+}
+
+input[name="email"], input[name="firstName"] {
+    width: 50%;
+    display: block;
+}
+
+input[type="submit"] {
+    padding: .5em;
+    font-family: var(--third-font);
+    font-size: 1.5rem;
+    background: #000;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    margin-top: 2rem; 
+    color: #fff;
+    transition: linear 150ms all;
+    width: 50%
+}
+
+input[type="submit"]:hover {
+    color: #000;
+    background: #fff;
+    cursor: pointer;
+}
+
+
+textarea[name="message"] {
+    display: block;
+}
+
+/* footer ================================================================= */
+footer {
+    width: 100vw;
+    margin-top: 10rem;
+    background-color: #000;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
+    padding: 5em;
+}
+
+#social-media {
+    display: flex;
+    width: 80vw;
+    margin: 5rem auto;
+    justify-content: center;
+    gap: 3em;
+    font-size: 1.5rem;
+}
+
+#social-media > div:hover, #social-media > div:focus{
+    color: var(--color-four);
+}
+
+#main-footer h1 {
+    line-height: 1.6em;
+}
 
 
 /* Projects ================================================================= */
@@ -216,31 +432,73 @@ header {
 }
 
 #project-title {
-    font-size: 5rem;
-    line-height: 6rem;
+    font-size: 4rem;
+    line-height: 5rem;
     color: #000;
     text-align: center;
     font-family: var(--third-font);
+    margin-bottom: 10rem;
 }
 
-#neline-project {
+/* Neline ================================================================= */
+
+.project {
     margin-top: 10rem;
-    width: 90vw;
+    width: 100vw;
     display: flex;
     margin: 0 auto;
 }
 
-#neline-project > div {
+.project > div {
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2em;
-    border-right: 2px dashed var(--color-one);
 }
 
-#neline-video {
+/* Project info styling */
+.project-left {
+    background-color: #000;
+    border-bottom-right-radius: 25%;
+    border-top-right-radius: 25%;
+    border-right: 3px dashed var(--color-one);
+}
+.project-right {
+    background-color: #000;
+    border-bottom-left-radius: 25%;
+    border-top-left-radius: 25%;
+    border-left: 3px dashed var(--color-one);
+}
+
+.project-left > h2, .project-right > h2{
+    color: var(--color-four);
+}
+
+.project-left > p, .project-right > p {
+    margin-top: 1rem;
+    text-align: justify;
+    max-width: 80ch;
+}
+
+.project h2 {
+    line-height: 1.6em;
+}
+
+.neline-links {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+    font-size: 1.5rem;
+}
+
+.neline-links > div:hover {
+    color: #999;
+}
+
+
+.project-video {
     width: 560px;
     margin: 0rem auto;
     height: 315px;
@@ -251,7 +509,7 @@ header {
 }
 
 #neline-title {
-    font-size: 5rem;
+    font-size: 4rem;
     margin-bottom: 3rem;
     color: #000;
     text-align: center;
@@ -267,6 +525,17 @@ header {
 }
 
 
+/* Nasa/disney */
+#nasa-project, #prime-project, #pi-project, #image-project{
+    margin-top: 10rem;
+}
+
+#pi {
+    width: 600px;
+}
+
+
+/* Animations ================================================================= */
 @keyframes trapdoor {
     0% {
         transform: rotateX(90deg)  rotateY(0deg) scaleX(1.0);
@@ -281,8 +550,6 @@ header {
         box-shadow: 10px 20px #000;
     }
 }
-
-/* Animations ================================================================= */
 
 @keyframes slideIn {
     0% {
@@ -321,7 +588,7 @@ header {
 
     100% {
         transform: translate(0);
-        width: 400px;
+        width: 350px;
         visibility: visible;
         opacity: 1;
     }
@@ -343,3 +610,275 @@ header {
     from { width: 0 }
     to { width: 100% }
   }
+
+@keyframes reveal {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Media Queries ================================================================= */
+/* Originally built for 1080p screens */
+
+
+
+/* Big Screens (4k+) */
+@media screen and (min-width: 2560px) { 
+    body {
+        width: 100vw;
+        min-height: 100vh;
+        position: absolute;
+        left: 50%;
+        overflow-y: scroll;
+        transform: translate(-50%);
+    }
+
+    #social-media {
+        max-width: 80%;
+    }
+}
+
+/* Small laptops and */
+@media screen and (max-width: 1400px) {
+    :root {
+        font-size: .75rem;
+    }
+
+    canvas {
+        max-width: 300px !important;
+    }
+
+    .project-video {
+        max-width: 350px;
+        max-height: 226px;
+    }
+
+    #neline-title {
+        display: none;
+    }
+
+    #setup-img {
+        max-width: 400px;
+        max-height: 225px;
+    }
+
+    #nav-profile-img {
+        width: 30px;
+    }
+}
+
+/* Ipad */
+@media screen and (max-width: 1100px) {
+    body {
+        position: absolute;
+        overflow-x: scroll;
+    }
+
+    html {
+        width: 100vw;
+    }
+
+    #black-foreground {
+        max-width: 400px;
+    }
+
+    .project-right {
+        margin-left: 2em;
+    }
+
+    #setup-img {
+        margin-left: 2em;
+    }
+
+    #images-about-me {
+        display:flex;
+        align-items: center;
+    }
+}
+
+
+
+/* Smartphone */
+@media screen and (max-width: 700px) {
+    :root {
+        font-size: .8rem;
+    }
+
+    /* Mobile Header ================================================================= */
+    #canvas1 {
+        max-width: 200px !important;
+        opacity: 1;
+        transform: translate(0);
+        margin-top: -8rem;
+        visibility: visible;
+        width: 200px;
+        animation: none;
+        margin-bottom: 4rem;
+    }
+
+    #intro-animation {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    #main-header {
+        min-height: 100vh;
+        padding: 0;
+        animation: border-radius-header 2000ms 1000ms forwards;
+    }
+
+    #title-bar, #header-name {
+        animation: none;
+    }
+
+    #hader-name, #header-name {
+        transform: translate(0);
+        opacity: 1;
+        text-align: center;
+    }
+
+    #developer-label {
+        display: none;
+    }
+
+    #title-bar {
+        padding: 0;
+    }
+
+    #header-name {
+        font-size: 4rem;
+    }
+
+    #main-nav {
+        display: none;
+    }
+
+    #scroll-down {
+        margin-top: 2em;
+        animation: reveal 2000ms 1000ms forwards;
+    }
+
+    /* Mobile Projects ================================================================= */
+
+    .project {
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 0 !important;
+    }
+
+    .project > div {
+        width: 90%;
+        padding: 3em 2em;
+        line-height: 1.6em;
+    }
+
+    #project-title {
+        margin-bottom: 5rem;
+    }
+
+    #neline-project {
+        margin-top: 0;
+    }
+
+    #projects {
+        margin-top: 5rem;
+    }
+
+    #neline-right {
+        margin: 0 auto;
+    }
+
+    .project h2 {
+        line-height: 1.6em;
+    }
+
+    .project-video {
+        margin: 0;
+        max-width: 90vw;
+    }
+
+    #black-foreground {
+        margin: 0;
+    }
+
+    #nasa-project, #pi-project {
+        flex-direction: column-reverse;
+    }
+
+    #pi {
+        margin: 0 auto;
+    }
+
+    .project-right {
+        /* Compensating for  width 90%*/
+        margin-left: 10%; 
+        max-width: 120ch;
+    }
+
+    .project-left >p, .project-right >p {
+        text-align: center;
+    }
+
+    /* Mobile About Me ================================================================= */
+    #info-me {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2em;
+        padding: 0;
+    }
+
+    #about-me {
+        margin-top: 1em;
+        padding: 6em 2em;
+    }
+
+    #intro-about-me {
+        max-width: 200ch;
+        padding: 0;
+    }
+
+    #intro-about-me > p {
+        text-align: center;
+    }
+
+    #setup-img {
+        max-width: 90vw;
+        height: auto;
+    }
+
+    /* Mobile Contact ================================================================= */
+    #splitter {
+        flex-direction: column-reverse;
+    }
+
+    #form-mail {
+        width: 90%;
+        padding: 2em;
+        margin: 0 auto;
+    }
+
+    /* Mobile Footer ================================================================= */
+
+    footer {
+        margin-top: 5rem;
+        padding-bottom: 0;
+    }
+
+    #main-footer > h2 {
+        line-height: 1.6em;
+    }
+
+    #social-media {
+        gap: 1em;
+        max-width: 90%;
+        flex-wrap: wrap;
+        font-size: 1.25rem;
+    }
+
+}
