@@ -1,4 +1,6 @@
-const scrollToProjectsButton = document.querySelector("#scroll-to-project-button");
+
+export default function runScrollHandler() {
+    const scrollToProjectsButton = document.querySelector("#scroll-to-project-button");
 scrollToProjectsButton.addEventListener("click", function() {
     document.querySelector("#projects").scrollIntoView();
 })
@@ -13,3 +15,5 @@ document.querySelector("#form").addEventListener("submit", (e) => {
     e.preventDefault();
     document.querySelector("#form").innerHTML = "<h3>Ditt mail är skickat! Jag svarar inom kortast tid.</h3>"
 })
+
+}

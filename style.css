@@ -4,6 +4,7 @@ html {
     scroll-behavior: smooth;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 :root {
