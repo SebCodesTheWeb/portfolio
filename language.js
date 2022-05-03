@@ -446,7 +446,7 @@ fetch('https://api.ipregistry.co/?key=9arst6ertvyekfd8')
         return response.json();
     })    
     .then(function (payload) {
-        if(payload.location.country.name !== "Sweden") {
+        if(payload.location.country.name === "Sweden") {
             document.body.innerHTML = englishHTML; 
             runCanvasAnimation();
             runScrollHandler();
